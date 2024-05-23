@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/white"
+    tools:context=".DashboardActivity">
 
 
     <LinearLayout
@@ -16,158 +17,68 @@
         <LinearLayout
             android:id="@+id/layer"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:orientation="vertical">
+            android:layout_height="550dp"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:gravity="bottom|center">
 
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="350dp"
+                android:src="@drawable/farmer"
+                android:layout_marginBottom="40dp"/>
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="70dp"
+                android:text="Thank you for joining Framer!"
+                android:textSize="28dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="#3b3b3b"
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/layer_control"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="200dp"
             android:orientation="vertical"
-            android:translationY="390dp"
-            android:background="@drawable/bachground_button_white"
-            android:gravity="center_horizontal"
-            app:cardElevation="15dp"
-            android:elevation="6dp">
+            android:background="@drawable/bachground_button_green"
+            android:gravity="center"
+            app:cardElevation="20dp"
+            android:elevation="10dp">
 
             <TextView
-                android:layout_width="110dp"
-                android:layout_height="50dp"
-                android:textSize="30dp"
-                android:text="Control"
-                android:textStyle="bold"
+                android:layout_width="300dp"
+                android:layout_height="25dp"
+                android:text="Please add your phone number"
+                android:textSize="18dp"
                 android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/black"/>
-            <LinearLayout
-                android:layout_width="390dp"
-                android:layout_height="180dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp"
-                android:gravity="center">
-                <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="160dp"
-                    android:layout_height="160dp"
-                    android:background="@drawable/bachground_button_green"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    app:cardElevation="15dp"
-                    android:elevation="6dp"
-                    android:layout_marginHorizontal="8dp"
-                    >
+                android:textStyle="bold"/>
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/power"
-                        android:layout_marginTop="25dp"
-                        />
-                    <Button
-                        android:id="@+id/btn_reload"
-                        android:layout_width="140dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/btn_white"
-                        android:text="On/Off"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:layout_marginTop="35dp"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearLayoutRELOAD"
-                    android:layout_width="160dp"
-                    android:layout_height="160dp"
-                    android:background="@drawable/bachground_button_blu"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    app:cardElevation="15dp"
-                    android:elevation="6dp"
-                    android:layout_marginHorizontal="8dp"
-                    >
+            <EditText
+                android:id="@+id/editTextPhoneNumber"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:textSize="18dp"
+                android:outlineAmbientShadowColor="#8cb349"
+                android:outlineSpotShadowColor="#8cb349"
+                android:shadowColor="#8cb349"
+                android:inputType="phone"
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/sandclock"
-                        android:layout_marginTop="25dp"
-                        />
-                    <EditText
-                        android:id="@+id/btn_gsm_power"
-                        android:layout_width="140dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/btn_white"
-                        android:paddingStart="70dp"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:layout_marginTop="35dp"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/layer_alert"
-                android:layout_width="390dp"
-                android:layout_height="150dp"
-                android:orientation="vertical"
-                android:layout_marginTop="20dp"
-                android:alpha="1"
-                android:gravity="center">
-
-                <LinearLayout
-                    android:layout_width="320dp"
-                    android:layout_height="70dp"
-                    android:orientation="vertical"
-                    android:gravity="left">
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="30dp"
-                        android:textSize="23dp"
-                        android:textStyle="bold"
-                        android:text="My alerts"
-                        android:textColor="@color/black"/>
-
-                    <TextView
-                        android:id="@+id/txt_alert_descr"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical"
-                        android:textSize="18dp"
-                        android:text="Your wis will be off after 2 houres"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="380dp"
-                    android:layout_height="60dp"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-                    <Button
-                        android:id="@+id/btn_agree"
-                        android:layout_width="160dp"
-                        android:layout_height="50dp"
-                        android:text="Agree"
-                        android:textStyle="bold"
-                        android:textSize="15sp"
-                        android:layout_marginHorizontal="12dp"
-                        android:background="@drawable/bachground_button_def"
-                        />
-                    <Button
-                        android:id="@+id/btn_keep"
-                        android:layout_width="160dp"
-                        android:layout_height="50dp"
-                        android:text="keep on"
-                        android:textStyle="bold"
-                        android:textSize="15sp"
-                        android:layout_marginHorizontal="12dp"
-                        android:background="@drawable/bachground_button_def"
-                        />
-                </LinearLayout>
-            </LinearLayout>
-
-
-
-
+                android:layout_marginVertical="10dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="280dp"
+                android:layout_height="55dp"
+                android:text="Get Start"
+                android:textStyle="bold"
+                android:textColor="#8cb349"
+                android:textSize="15sp"
+                android:background="@drawable/bachground_button_white"
+                />
         </LinearLayout>
     </LinearLayout>
 

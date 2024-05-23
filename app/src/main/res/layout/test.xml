@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".DashboardActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/layer"
+            android:layout_width="match_parent"
+            android:layout_height="710dp"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:translationY="200dp"
+            android:gravity="bottom|center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="right|center_vertical"
+                android:layout_marginBottom="40dp"
+                >
+
+                <ImageView
+                    android:id="@+id/image_help"
+                    android:layout_width="33dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/userguide"
+                    android:layout_marginRight="250dp"
+                    />
+                <ImageView
+                    android:id="@+id/image_update"
+                    android:layout_width="35dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/upd"
+                    android:layout_marginRight="25dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layer_descreption"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="-150dp">
+
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/GIF"
+                    android:layout_width="300dp"
+                    android:layout_height="240dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/sbala"/>
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:text="Hi ! there "
+                    android:textSize="35dp"
+                    android:textColor="@color/Blue_v1"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="-00dp"
+                    />
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="290dp"
+                    android:layout_height="25dp"
+                    android:layout_marginBottom="-10dp"
+                    android:gravity="center"
+                    android:text="Press RELOAD button to get the latest status "
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    tools:ignore="TextSizeCheck" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layer_remote"
+                android:layout_width="390dp"
+                android:layout_height="180dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:translationY="150dp"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:background="@drawable/bachground_button_def"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    app:cardElevation="15dp"
+                    android:elevation="6dp"
+                    android:layout_marginHorizontal="8dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/power"
+                        android:layout_marginTop="25dp"
+                        />
+                    <Button
+                        android:id="@+id/btn_power"
+                        android:layout_width="140dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btn_white"
+                        android:text="On/Off"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:layout_marginTop="35dp"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayoutRELOAD"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:background="@drawable/bachground_button"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    app:cardElevation="15dp"
+                    android:elevation="6dp"
+                    android:layout_marginHorizontal="8dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/reload"
+                        android:layout_marginTop="25dp"
+                        />
+                    <Button
+                        android:id="@+id/btn_reload"
+                        android:layout_width="140dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btn_white"
+                        android:text="Reload"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:layout_marginTop="35dp"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layer_mods"
+                android:layout_width="390dp"
+                android:layout_height="180dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:translationY="200dp"
+                android:layout_marginBottom="10dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="7dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:elevation="6dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="350dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:padding="6dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/power"
+                            android:layout_marginHorizontal="5dp"/>
+
+                        <LinearLayout
+                            android:layout_width="150dp"
+                            android:layout_height="70dp"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="2dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:text="mode "
+                                android:textSize="18dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:text="turns off after"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                tools:ignore="TextSizeCheck" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btn_mode1"
+                            android:layout_width="70dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginHorizontal="0dp"
+                            android:text="set"
+                            android:background="@drawable/bachground_button_greenv"
+                            />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:elevation="6dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="350dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:padding="6dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/power"
+                            android:layout_marginHorizontal="5dp"/>
+
+                        <LinearLayout
+                            android:layout_width="150dp"
+                            android:layout_height="70dp"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="2dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:text="Sage mode"
+                                android:textSize="18dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:text="turns off after"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                tools:ignore="TextSizeCheck" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btn_mode2"
+                            android:layout_width="70dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginHorizontal="0dp"
+                            android:text="set"
+                            android:background="@drawable/bachground_button_greenv"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layer_edit"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="vertical"
+            android:background="@drawable/bachground_button_blu30"
+            android:gravity="center"
+            android:translationY="250dp"
+            app:cardElevation="20dp"
+            android:layout_marginBottom="150dp"
+            android:elevation="10dp">
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="25dp"
+                android:text="Update your phone number"
+                android:textSize="18dp"
+                android:gravity="center"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/editTextPhoneNumberupdate"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:textSize="18dp"
+                android:outlineAmbientShadowColor="#8cb349"
+                android:outlineSpotShadowColor="#8cb349"
+                android:shadowColor="#8cb349"
+                android:inputType="phone"
+
+                android:layout_marginVertical="10dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+            <Button
+                android:id="@+id/buttonUpdate"
+                android:layout_width="280dp"
+                android:layout_height="55dp"
+                android:text="Save"
+                android:textStyle="bold"
+                android:textColor="#4181ea"
+                android:textSize="15sp"
+                android:background="@drawable/bachground_button_white"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
