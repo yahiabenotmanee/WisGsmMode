@@ -77,6 +77,7 @@
             />
 
         <GridLayout
+
             android:id="@+id/layer_grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,10 +85,12 @@
             android:columnCount="1"
             android:columnOrderPreserved="false"
             android:rowCount="3"
-            android:translationY="230dp"
+            android:translationY="0dp"
             >
 
             <androidx.cardview.widget.CardView
+
+                android:id="@+id/Card_frist"
                 android:layout_width="wrap_content"
                 android:layout_height="220dp"
                 android:layout_rowWeight="1"
@@ -100,6 +103,7 @@
                 app:cardElevation="10dp">
 
                 <LinearLayout
+                    android:id="@+id/layercard1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"
@@ -160,6 +164,7 @@
                                 android:orientation="vertical"
                                 android:gravity="center"
                                 android:layout_marginHorizontal="2dp">
+
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp"
@@ -261,6 +266,7 @@
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/Card_second"
                 android:layout_width="wrap_content"
                 android:layout_height="220dp"
                 android:layout_rowWeight="1"
@@ -273,6 +279,7 @@
                 app:cardElevation="10dp">
 
                 <LinearLayout
+                    android:id="@+id/layercard2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"
@@ -445,7 +452,7 @@
             android:gravity="center"
             app:cardElevation="20dp"
             android:elevation="10dp"
-            android:translationY="250dp"
+            android:translationY="20dp"
             >
 
             <TextView

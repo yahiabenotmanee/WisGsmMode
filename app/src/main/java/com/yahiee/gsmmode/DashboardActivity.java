@@ -3,6 +3,7 @@ package com.yahiee.gsmmode;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -35,11 +36,15 @@ public class DashboardActivity extends AppCompatActivity {
     private EditText editTextNewPhoneNumber;
     private Button buttonUpdate;
 
+    public GridLayout gridLayout;
     private PhoneNumberDatabase database;
 
     private static final int SMS_PERMISSION_CODE = 1;
     private static final int SMS_PERMISSION_REQUEST_CODE = 101;
     private SMSReceiver smsReceiver;
+
+    String isON1,isOFF1,isON2,isOFF2;
+    CardView cardViewPOMP1,cardViewPOMP2;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -47,18 +52,16 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+
         if (checkSmsPermission()) {
             setupSmsReceiver();
         } else {
             requestSmsPermission();
         }
 
-//        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) LinearLayout remote = findViewById(R.id.layer_remote);
-//        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) LinearLayout modes = findViewById(R.id.layer_mods);
-//        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) LinearLayout descreption = findViewById(R.id.layer_descreption);
+
+
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) LinearLayout update = findViewById(R.id.layer_edit);
-//        Button button_reload = findViewById(R.id.btn_reload);
-//        Button button_power = findViewById(R.id.btn_power);
 
         Button button_mod11 = findViewById(R.id.btn_mode11);
         Button button_mod12 = findViewById(R.id.btn_mode12);
@@ -72,16 +75,33 @@ public class DashboardActivity extends AppCompatActivity {
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView textView1 = findViewById(R.id.text1);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView textView2 = findViewById(R.id.text2);
 
-        GridLayout gridLayout =findViewById(R.id.layer_grid);
+        gridLayout =findViewById(R.id.layer_grid);
+
+        cardViewPOMP1=findViewById(R.id.Card_frist);
+        cardViewPOMP2=findViewById(R.id.Card_second);
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) LinearLayout layerCard1 = findViewById(R.id.layercard1);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) LinearLayout layerCard2 = findViewById(R.id.layercard2);
 
 
+        //                                       home Status
+
+        showPopup();
+        cardViewPOMP1.setVisibility(View.INVISIBLE);
+        cardViewPOMP2.setVisibility(View.INVISIBLE);
+
+        //run_anim(gridLayout);
+
+        //              RLOAD IMAGE
         imageView_relod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendMessage("!");
+
+                sendMessage("n");
             }
         });
 
+            //          Action Button
 
         button_mod11.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,11 +131,16 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        //               end buttons
+
+
+
+        //               UPDATE NUMBER IMAGE
         imageView_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                run_anim3(update);
-                run_anim4(gridLayout);
+
+                  run_anim3(update);
             }
         });
 
@@ -130,11 +155,18 @@ public class DashboardActivity extends AppCompatActivity {
         handler.postDelayed(() -> {}, 1000);
 
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                String newPhoneNumber = editTextNewPhoneNumber.getText().toString();
+                if (!newPhoneNumber.isEmpty()) {
+                    // Update the phone number in the database
+                    new UpdatePhoneNumberTask().execute(new PhoneNumber(newPhoneNumber));
+                } else {
+                    editTextNewPhoneNumber.setError("Can't be empty");
+                }
 
-                run_anim2(update);
-                run_anim2(gridLayout);
+                run_anim(update);
 
             }
         });
@@ -143,6 +175,15 @@ public class DashboardActivity extends AppCompatActivity {
 
     } /////////////                                  end oncreat
 
+
+
+    // Animation methods
+    void run_anim(View view) {
+        view.animate().setDuration(600).translationY(0);
+    }
+    void run_anim3(View view) {
+        view.animate().setDuration(600).translationY(-600);
+    }
 
 
     // PERMISSION
@@ -217,49 +258,85 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
+
+     //                                  DISPLAY MESSAGE
+
     private void displayLastReceivedMessage() throws Exception {
         Uri uri = Uri.parse("content://sms/inbox");
         Cursor cursor = getContentResolver().query(uri, null, null, null, "date DESC");
 
         if (cursor != null && cursor.moveToFirst()) {
             String message = cursor.getString(cursor.getColumnIndexOrThrow("body"));
-            //messageTextView.setText("" +decrypt(message, secretKey));
-            Toast.makeText(this, "message = "+message, Toast.LENGTH_SHORT).show();
+
+            //Toast.makeText(this, "message = "+message, Toast.LENGTH_SHORT).show();
+
+                                                  // to confirme
+            if (message.equals("n")){
+
+                run_anim(gridLayout);
+                cardViewPOMP1.setVisibility(View.VISIBLE);
+                cardViewPOMP2.setVisibility(View.INVISIBLE);
+
+                //gridLayout.setBackgroundResource(R.drawable.bachground_button_red);
+
+            }
+
+            if (message.equals("System ON")){
+                showPopup();
+            }
+
+            if (message.equals("System activated (off)")){
+
+                cardViewPOMP1.setVisibility(View.INVISIBLE);
+                cardViewPOMP2.setVisibility(View.INVISIBLE);
+                Toast.makeText(this,"Your system not acivated", Toast.LENGTH_SHORT).show();
+            }
+
+            if (message.equals("System activated (on)")){
+
+                Toast.makeText(this,"Your system activated", Toast.LENGTH_SHORT).show();
+            }
+
+            if (message.equals("Pompe 1 OFF")){
+               // cardViewPOMP1.setVisibility(View.INVISIBLE);
+            }
+
+            if (message.equals("Pompe 1 ON")){
+                cardViewPOMP1.setVisibility(View.VISIBLE);
+            }
+
+            if (message.equals("Pompe 2 OFF")){
+
+            }
+
+            if (message.equals("Pompe 2 ON")){
+                cardViewPOMP2.setVisibility(View.VISIBLE);
+
+            }
+
+            if (message.equals("Pompe 1 ON 45 minute")){
+                cardViewPOMP1.setVisibility(View.VISIBLE);
+            }
+
+            if (message.equals("Pompe 2 ON 45 minute")){
+                cardViewPOMP2.setVisibility(View.VISIBLE);
+            }
+
+            if (message.equals("Pompe 1 deja ON")){
+                cardViewPOMP1.setVisibility(View.VISIBLE);
+            }
+
+            if (message.equals("Pompe 2 deja ON")){
+                cardViewPOMP2.setVisibility(View.VISIBLE);
+            }
+
             cursor.close();
         } else {
+
             //messageTextView.setText("Aucun message trouvé dans la boîte de réception.");
         }
     }
 
-
-
-
-
-
-
-
-
-    // Animation methods
-    void run_anim(View view) {
-        view.animate().setDuration(600).translationY(100);
-    }
-    void run_anim2(View view) {
-        view.animate().alpha(1).setDuration(1000).translationY(50);
-    }
-
-    void run_anim2v200(View view) {
-        view.animate().alpha(1).setDuration(1000).translationY(200);
-    }
-    void run_anim3(View view) {
-        view.animate().setDuration(600).translationY(-600);
-    }
-
-    void run_anim3v300(View view) {
-        view.animate().setDuration(600).translationY(-200);
-    }
-    void run_anim4(View view) {
-        view.animate().setDuration(600).translationY(900);
-    }
 
     // Method to send SMS
     private void sendMessage(String message) {
@@ -313,24 +390,15 @@ public class DashboardActivity extends AppCompatActivity {
             return null;
         }
     }
+
     private void showPopup() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.pop, null);
         builder.setView(dialogView);
 
-//        // Initialize your views inside the pop-up layout
-//        EditText editTextPopup = dialogView.findViewById(R.id.editTextPopup);
-//        Button buttonPopupSubmit = dialogView.findViewById(R.id.buttonPopupSubmit);
-//
-//        // Set click listener for the submit button inside the pop-up
-//        buttonPopupSubmit.setOnClickListener(v -> {
-//            String input = editTextPopup.getText().toString();
-//            // Handle the input from the pop-up
-//            Toast.makeText(this, "Input: " + input, Toast.LENGTH_SHORT).show();
-//        });
-
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
 }
