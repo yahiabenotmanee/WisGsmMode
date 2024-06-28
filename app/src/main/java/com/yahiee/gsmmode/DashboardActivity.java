@@ -46,6 +46,8 @@ public class DashboardActivity extends AppCompatActivity {
     String isON1,isOFF1,isON2,isOFF2;
     CardView cardViewPOMP1,cardViewPOMP2;
 
+    public LinearLayout update;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) LinearLayout update = findViewById(R.id.layer_edit);
+        update = findViewById(R.id.layer_edit);
 
         Button button_mod11 = findViewById(R.id.btn_mode11);
         Button button_mod12 = findViewById(R.id.btn_mode12);
@@ -140,7 +142,10 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                  run_anim3(update);
+                //  run_anim3(update);
+
+
+                  showPopupCHOSE();
             }
         });
 
@@ -185,7 +190,6 @@ public class DashboardActivity extends AppCompatActivity {
         view.animate().setDuration(600).translationY(-600);
     }
 
-
     // PERMISSION
     private boolean checkSmsPermission() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
@@ -206,6 +210,7 @@ public class DashboardActivity extends AppCompatActivity {
                 , new SMSContentObserver(new Handler()));
     }
 
+
     // PERMISSION
     @SuppressLint("MissingSuperCall")
     @Override
@@ -214,7 +219,9 @@ public class DashboardActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 setupSmsReceiver();
             } else {
+
                 Toast.makeText(this, "Permission SMS refusée. Impossible de lire les messages.", Toast.LENGTH_SHORT).show();
+
             }
 
         }
@@ -241,6 +248,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         }
     }
+
 
     private class SMSContentObserver extends ContentObserver {
         public SMSContentObserver(Handler handler) {
@@ -270,6 +278,7 @@ public class DashboardActivity extends AppCompatActivity {
 
             //Toast.makeText(this, "message = "+message, Toast.LENGTH_SHORT).show();
 
+
                                                   // to confirme
             if (message.equals("n")){
 
@@ -277,12 +286,15 @@ public class DashboardActivity extends AppCompatActivity {
                 cardViewPOMP1.setVisibility(View.VISIBLE);
                 cardViewPOMP2.setVisibility(View.INVISIBLE);
 
+                showPomp();
+
                 //gridLayout.setBackgroundResource(R.drawable.bachground_button_red);
 
             }
 
             if (message.equals("System ON")){
-                showPopup();
+                showPomp();
+                Toast.makeText(this,"System on", Toast.LENGTH_SHORT).show();
             }
 
             if (message.equals("System activated (off)")){
@@ -299,10 +311,12 @@ public class DashboardActivity extends AppCompatActivity {
 
             if (message.equals("Pompe 1 OFF")){
                // cardViewPOMP1.setVisibility(View.INVISIBLE);
+
             }
 
             if (message.equals("Pompe 1 ON")){
                 cardViewPOMP1.setVisibility(View.VISIBLE);
+                showPomp();
             }
 
             if (message.equals("Pompe 2 OFF")){
@@ -311,6 +325,7 @@ public class DashboardActivity extends AppCompatActivity {
 
             if (message.equals("Pompe 2 ON")){
                 cardViewPOMP2.setVisibility(View.VISIBLE);
+                showPomp2();
 
             }
 
@@ -324,10 +339,12 @@ public class DashboardActivity extends AppCompatActivity {
 
             if (message.equals("Pompe 1 deja ON")){
                 cardViewPOMP1.setVisibility(View.VISIBLE);
+                showPomp();
             }
 
             if (message.equals("Pompe 2 deja ON")){
                 cardViewPOMP2.setVisibility(View.VISIBLE);
+                showPomp2();
             }
 
             cursor.close();
@@ -372,7 +389,7 @@ public class DashboardActivity extends AppCompatActivity {
             if (phoneNumber != null) {
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNumber.getPhoneNumber(), null, message, null, null);
-                //Toast.makeText(DashboardActivity.this, "SMS sent", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(DashboardActivity.this, "SMS sent", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(DashboardActivity.this, "Phone number not found", Toast.LENGTH_SHORT).show();
             }
@@ -380,14 +397,17 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     // AsyncTask to update the phone number in the database
+
     private class UpdatePhoneNumberTask extends AsyncTask<PhoneNumber, Void, Void> {
         @Override
         protected Void doInBackground(PhoneNumber... phoneNumbers) {
+
             // Clear the existing phone number(s)
             database.phoneNumberDao().clearPhoneNumbers();
             // Insert the new phone number
             database.phoneNumberDao().insert(phoneNumbers[0]);
             return null;
+
         }
     }
 
@@ -400,5 +420,51 @@ public class DashboardActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+    private void showPomp() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.pomp1, null);
+        builder.setView(dialogView);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void showPomp2() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.pomp1, null);
+        builder.setView(dialogView);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+    private void showPopupCHOSE() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.chose, null);
+        builder.setView(dialogView);
+
+        Button buttonActivity1 = dialogView.findViewById(R.id.buttonActivity1);
+        Button buttonActivity2 = dialogView.findViewById(R.id.buttonActivity2);
+
+        buttonActivity1.setOnClickListener(v -> {
+            // Start Activity 1
+            Intent intent = new Intent(DashboardActivity.this, GraphActivity.class);
+            startActivity(intent);
+        });
+
+        buttonActivity2.setOnClickListener(v -> {
+//            // Start Activity 2
+//            Intent intent = new Intent(DashboardActivity.this, Activity2.class);
+//            startActivity(intent);
+
+            run_anim3(update);
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 
 }
